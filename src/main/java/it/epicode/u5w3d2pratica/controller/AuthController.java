@@ -43,10 +43,5 @@ public class AuthController {
         return authService.login(loginDto);
     }
 
-    @GetMapping("/refresh")
-    public ResponseEntity<String> refreshToken(@RequestHeader("Authorization") String bearerToken) {
-        String token = bearerToken.replace("Bearer ", "");
-        String refreshedToken = jwtTool.refreshToken(token);
-        return ResponseEntity.ok(refreshedToken);
-    }
+
 }
