@@ -6,6 +6,7 @@ import it.epicode.u5w3d2pratica.model.User;
 import it.epicode.u5w3d2pratica.repository.UserRepository;
 import it.epicode.u5w3d2pratica.security.JwtTool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,9 @@ public class AuthService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JwtTool jwtTool;

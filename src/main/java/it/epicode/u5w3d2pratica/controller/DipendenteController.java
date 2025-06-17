@@ -26,7 +26,7 @@ public class DipendenteController {
     private DipendenteService dipendenteService;
 
 
-    @PostMapping
+    @PostMapping("/dipendenti")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<DipendenteDto> Dipendente(@RequestBody DipendenteDto dipendenteDto) {
         try {
@@ -40,8 +40,8 @@ public class DipendenteController {
     }
 
 
-    @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER)")
+    @GetMapping("/autori/{id}")
+
     public Page<Dipendente> getAllDipendenti(@RequestParam(defaultValue = "0")int page,
                                              @RequestParam(defaultValue = "10")int size,
                                              @RequestParam(defaultValue = "matricola")String sortBy) {

@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -25,13 +27,20 @@ public class SecurityConfig {
         httpSecurity.cors(Customizer.withDefaults());
 
         httpSecurity.authorizeHttpRequests(http->http.requestMatchers("/auth/**").permitAll());
- httpSecurity.authorizeHttpRequests(http->http.requestMatchers(HttpMethod.GET,"/dipendenti/**").permitAll());
+ //httpSecurity.authorizeHttpRequests(http->http.requestMatchers(HttpMethod.GET,"/dipendenti/**").permitAll());
 
-        httpSecurity.authorizeHttpRequests(http->http.requestMatchers("/dipendenti").permitAll());
+        httpSecurity.authorizeHttpRequests(http->http.requestMatchers(HttpMethod.GET).permitAll());
         httpSecurity.authorizeHttpRequests(http->http.requestMatchers(HttpMethod.POST).permitAll());
 
         httpSecurity.authorizeHttpRequests(http->http.anyRequest().denyAll());
 
         return httpSecurity.build();
      }
+
+    //crea un oggetto di tipo BcryptEncoder che verrà usato per codificare la password
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return  new BCryptPasswordEncoder(10);
+    }
+
    }
