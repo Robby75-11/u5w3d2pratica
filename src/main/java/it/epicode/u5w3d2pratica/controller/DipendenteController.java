@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dipendenti") //
 public class DipendenteController {
 
     @Autowired
@@ -27,7 +26,7 @@ public class DipendenteController {
 
 
     @PostMapping("/dipendenti")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<DipendenteDto> Dipendente(@RequestBody DipendenteDto dipendenteDto) {
         try {
 
@@ -40,18 +39,21 @@ public class DipendenteController {
     }
 
 
-    @GetMapping("/autori/{id}")
+    @GetMapping("/dipendenti")
 
     public Page<Dipendente> getAllDipendenti(@RequestParam(defaultValue = "0")int page,
                                              @RequestParam(defaultValue = "10")int size,
-                                             @RequestParam(defaultValue = "matricola")String sortBy) {
+                                             @RequestParam(defaultValue = "id")String sortBy) {
 
+        if (!sortBy.equals("id")) {
+            sortBy = "id";
+        }
 
         return dipendenteService.getAllDipendenti(page, size, sortBy);
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/dipendenti/{id}")
 
     public ResponseEntity<DipendenteDto> getDipendenteById(@PathVariable Long id) {
         try {
@@ -64,15 +66,7 @@ public class DipendenteController {
     }
 
 
-    @GetMapping("/page")
-
-    public ResponseEntity<Page<DipendenteDto>> getAllDipendentiPaged(Pageable pageable) {
-        Page<DipendenteDto> dipendentiPage = dipendenteService.get(pageable);
-        return new ResponseEntity<>(dipendentiPage, HttpStatus.OK);
-    }
-
-
-    @PutMapping("/{id}")
+    @PutMapping("/dipendenti/{id}")
 
     public ResponseEntity<DipendenteDto> updateDipendente(@PathVariable Long id, @RequestBody DipendenteDto dipendenteDto) {
         try {
@@ -105,7 +99,7 @@ public class DipendenteController {
 
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/dipendenti/{id}")
 
     public ResponseEntity<Void> deleteDipendente(@PathVariable Long id) {
         try {

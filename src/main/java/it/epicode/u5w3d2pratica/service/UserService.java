@@ -29,7 +29,6 @@ public class UserService {
         //la password in chiaro che si trova nel dto, verrà passata come parametro al metodo encode dell'encoder
         //Bcrypt codificherà la password e generà un codice criptato
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setPassword(userDto.getPassword());
         user.setRole(Role.USER);
 
         return userRepository.save(user);

@@ -27,7 +27,7 @@ public class SecurityConfig {
         httpSecurity.cors(Customizer.withDefaults());
 
         httpSecurity.authorizeHttpRequests(http->http.requestMatchers("/auth/**").permitAll());
- //httpSecurity.authorizeHttpRequests(http->http.requestMatchers(HttpMethod.GET,"/dipendenti/**").permitAll());
+       //httpSecurity.authorizeHttpRequests(http->http.requestMatchers(HttpMethod.GET,"/dipendenti/**").permitAll());
 
         httpSecurity.authorizeHttpRequests(http->http.requestMatchers(HttpMethod.GET).permitAll());
         httpSecurity.authorizeHttpRequests(http->http.requestMatchers(HttpMethod.POST).permitAll());

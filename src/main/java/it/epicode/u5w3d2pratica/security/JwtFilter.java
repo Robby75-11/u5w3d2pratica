@@ -44,14 +44,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
             //creo un oggetto authentication inserendogli all'interno l'utente recuperato e il suo ruolo
             Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-
             //aggiungo l'autenticazione con l'utente nel contesto di Spring security
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }catch (NotFoundException e) {
-            throw new UnAuthorizedException("Utente collegato al token non trovato");
+            throw new UnAuthorizedException("Utente  non trovato");
 
         }
-
 
             filterChain.doFilter(request, response);
         }
